@@ -61,8 +61,8 @@ const Navbar = () => {
           {/* Discount Card */}
           <div className="bg-white p-6 rounded-2xl">
             <div className="text-black">
-              <span className="text-4xl font-bold">15%</span>
-              <p className="font-bold mt-2">DISCOUNT ON YOUR FIRST PROJECT</p>
+              <span className="text-4xl font-bold"></span>
+              <p className="font-bold mt-2">Contact</p>
             </div>
           </div>
         </div>
