@@ -81,7 +81,7 @@ const Navbar = () => {
       >
         <div className="grid grid-cols-2 gap-4 mb-4">
           {navItems.map((item) => (
-            <Link href={item.href} key={item.name} className="bg-red-800 w-full h-full">
+            <Link href={item.href} key={item.name}>
               <div className="bg-yellow-300 p-6 rounded-2xl flex items-center justify-between">
                 <span className="text-black text-2xl font-bold">
                   {item.name}
