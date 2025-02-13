@@ -31,7 +31,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Hi, I'm
+          Hi, I&apos;m
         </motion.p>
 
         <motion.h1
@@ -60,7 +60,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          I'm a passionate developer specializing in creating beautiful, functional, and user-friendly websites and applications. With expertise in modern web technologies, I turn ideas into reality.
+          I&apos;m a passionate developer specializing in creating beautiful, functional, and user-friendly websites and applications. With expertise in modern web technologies, I turn ideas into reality.
         </motion.p>
 
         <motion.button

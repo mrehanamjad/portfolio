@@ -19,7 +19,7 @@ const skills = [
 
 export default function Skills() {
   return (
-    <section className="bg-violet-300 text-black min-h-[30rem] h-full rounded-t-2xl mx-2 py-16 sticky top-4 ">
+    <section id="skills" className="bg-violet-200 text-black min-h-[30rem] h-full rounded-t-2xl mx-2 py-16 sticky top-4 ">
       <Container>
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold">My Skills</h2>

@@ -13,21 +13,21 @@ const Navbar = () => {
   const navItems = [
     {
       name: "About",
-      href: "/about",
+      href: "/",
       icon: User,
     },
     {
       name: "Skills",
-      href: "/skills",
+      href: "#skills",
       icon: Wrench,
     },
     {
       name: "Projects",
-      href: "/projects",
+      href: "#projects",
       icon: PanelsTopLeft,
     },
     {
-      name: "Contact",
+      name: "/Contact",
       href: "/contact",
       icon: Phone,
     },

@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { Instagram, Linkedin, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({

@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, CodeXml, Github } from "lucide-react"
+import { ArrowUpRight, CodeXml } from "lucide-react"
 import Container from "./Container"
 import data from "@/data/data.json"
 
@@ -8,7 +8,7 @@ const projects = data.projects;
 
 export default function ProjectsSection() {
   return (
-    <section className="bg-blue-300 text-black  h-full rounded-t-2xl mx-2 py-16 sticky top-8">
+    <section id="#projects" className="bg-cyan-100 text-black  h-full rounded-t-2xl mx-2 py-16 sticky top-8">
         <Container>
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold">My Projects</h2>
