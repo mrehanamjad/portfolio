@@ -1,6 +1,6 @@
 "use client"
 import React from 'react';
-import { Github, GithubIcon, Instagram, Linkedin } from 'lucide-react';
+import { Github, Linkedin } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 import Link from 'next/link';
 
@@ -57,21 +57,7 @@ const RetroLanding = () => {
 
       <ContactForm />
 
-        {/* Navigation */}
-        <nav className="mt-16">
-          <ul className="flex justify-end gap-8 text-xl font-bold">
-            {['HOME', 'PROJECTS', 'SERVICES', 'CONTACTS'].map((item) => (
-              <li key={item}>
-                <a 
-                  href="#" 
-                  className="text-gray-800 hover:text-gray-600 transition-colors"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+
       </div>
     </div>
   );
