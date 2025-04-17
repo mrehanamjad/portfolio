@@ -9,31 +9,35 @@ interface BackgroundLayoutProps {
 const BackgroundLayout: React.FC<BackgroundLayoutProps> = ({ children }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollPosition, setScrollPosition] = useState(0);
-  
-  // Track mouse movement for subtle parallax effect
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY
-      });
+    // Initial window size
+    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     };
-    
-    // Track scroll for parallax effect on blur spots
+
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
     };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('scroll', handleScroll);
-    
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  // Array of blur spots with various colors and positions
   const blurSpots = [
     { color: "bg-purple-700", size: "w-96 h-96", position: "-translate-y-40 -translate-x-40", opacity: "opacity-20", delay: 0 },
     { color: "bg-blue-700", size: "w-96 h-96", position: "translate-y-full -translate-x-20", opacity: "opacity-20", delay: 0.2 },
@@ -44,44 +48,56 @@ const BackgroundLayout: React.FC<BackgroundLayoutProps> = ({ children }) => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-gray-950 ">
-      {/* Fixed background elements that span the entire page */}
+    <div className="relative min-h-screen bg-gray-950">
+      {/* Fixed background elements */}
       <div className="fixed inset-0 overflow-hidden">
-        {/* Base dark background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black -z-30 "></div>
-        
-        {/* Subtle grid pattern - assuming you have this SVG */}
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] opacity-5 -z-30"></div>
-        
-        {/* Blur spots */}
-        {blurSpots.map((spot, index) => (
-          <motion.div
-            key={index}
-            className={`absolute -z-30 ${spot.color} ${spot.size} rounded-full filter blur-3xl ${spot.opacity} ${spot.position}`}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ 
-              opacity: 0.3, 
-              scale: [0.8, 1.1, 1],
-            }}
-            transition={{ 
-              duration: 8,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: spot.delay,
-              ease: "easeInOut" 
-            }}
-            style={{
-              left: index % 3 === 0 ? '10%' : index % 3 === 1 ? '50%' : '70%',
-              top: index % 2 === 0 ? `${(index * 20) % 100}%` : `${(index * 15 + 30) % 100}%`,
-              transform: `translateY(${scrollPosition * 0.03 * (index % 3 === 0 ? -1 : 1)}px)`
-            }}
-          ></motion.div>
-        ))}
-        
-        {/* Vignette effect using tailwind gradients */}
-        <div className="absolute -z-30 inset-0 bg-radial-at-center from-transparent via-black/20 to-black/50 pointer-events-none"></div>
+        {/* Base gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black -z-30" />
+
+        {/* Subtle grid overlay */}
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] opacity-5 -z-30" />
+
+        {/* Blur Spots with Parallax Effect */}
+        {windowSize.width > 0 &&
+          blurSpots.map((spot, index) => {
+            const parallaxX = (mousePosition.x - windowSize.width / 2) * 0.005 * (index % 2 === 0 ? 1 : -1);
+            const parallaxY = (mousePosition.y - windowSize.height / 2) * 0.005 * (index % 2 === 0 ? 1 : -1);
+            const scrollY = scrollPosition * 0.03 * (index % 3 === 0 ? -1 : 1);
+
+            return (
+              <motion.div
+                key={index}
+                className={`absolute -z-30 ${spot.color} ${spot.size} rounded-full filter blur-3xl ${spot.opacity} ${spot.position}`}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 0.3, scale: [0.8, 1.1, 1] }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  delay: spot.delay,
+                  ease: "easeInOut",
+                }}
+                style={{
+                  left: index % 3 === 0 ? "10%" : index % 3 === 1 ? "50%" : "70%",
+                  top: index % 2 === 0 ? `${(index * 20) % 100}%` : `${(index * 15 + 30) % 100}%`,
+                  transform: `translateX(${parallaxX}px) translateY(${parallaxY + scrollY}px)`,
+                }}
+              />
+            );
+          })}
+
+        {/* Glow light following the mouse */}
+        <div
+          className="pointer-events-none fixed inset-0 -z-20"
+          style={{
+            background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 255, 255, 0.03), transparent 200px)`,
+          }}
+        />
+
+        {/* Vignette effect */}
+        <div className="absolute -z-30 inset-0 bg-radial-at-center from-transparent via-black/20 to-black/50 pointer-events-none" />
       </div>
-      
+
       {/* Page content */}
       <div className="relative z-10">{children}</div>
     </div>

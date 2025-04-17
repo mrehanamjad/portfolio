@@ -30,11 +30,10 @@ export default function Skills() {
 
       <Container>
         <div className="text-center mb-14">
-          {/* <h2 className="text-4xl md:text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"> My Skills</h2> */}
           <AuroraText className="text-4xl md:text-5xl font-bold mb-2" colors={["#c084fc","#60a5fa"]}>My Skills</AuroraText>
           <div className="h-1 w-20 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-4 rounded-full"></div>
           
-          <TextAnimate animation="slideLeft" by="character" className="text-gray-400 mt-2 md:text-xl max-w-2xl mx-auto">Technologies I've mastered to build modern, responsive web applications</TextAnimate>
+          <TextAnimate animation="slideLeft" by="character" className="text-gray-400 mt-2 md:text-xl max-w-2xl mx-auto">Technologies I&apos;ve mastered to build modern, responsive web applications</TextAnimate>
         
         </div>
 
