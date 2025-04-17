@@ -2,6 +2,8 @@
 import React from "react";
 import { AnimatedTooltip } from "./ui/animated-tooltip";
 import Container from "./Container";
+import { AuroraText } from "./magicui/aurora-text";
+import { TextAnimate } from "./magicui/text-animate";
 
 const skills = [
   { id: 1, name: 'HTML', image: '/html.png', designation: "Markup Language" },
@@ -17,16 +19,27 @@ const skills = [
   { id: 11, name: 'Node.js', image: '/nodejs.png', designation: "JavaScript Runtime" }
 ];
 
+
 export default function Skills() {
+  
   return (
-    <section id="skills" className="bg-violet-200 text-black min-h-[30rem] h-full rounded-t-2xl mx-2 py-16 sticky top-4 ">
+    <section 
+      id="skills" 
+      className=" text-white min-h-[30rem] h-full px-3 py-20 overflow-hidden "
+    >
+
       <Container>
-        <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-bold">My Skills</h2>
-          <p className="text-gray-600 mt-2 md:text-xl">Technologies I have experience with</p>
+        <div className="text-center mb-14">
+          {/* <h2 className="text-4xl md:text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400"> My Skills</h2> */}
+          <AuroraText className="text-4xl md:text-5xl font-bold mb-2" colors={["#c084fc","#60a5fa"]}>My Skills</AuroraText>
+          <div className="h-1 w-20 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-4 rounded-full"></div>
+          
+          <TextAnimate animation="slideLeft" by="character" className="text-gray-400 mt-2 md:text-xl max-w-2xl mx-auto">Technologies I've mastered to build modern, responsive web applications</TextAnimate>
+        
         </div>
+
         <div className="flex flex-row items-center justify-center gap-6 flex-wrap w-full">
-          <AnimatedTooltip items={skills} />
+           <AnimatedTooltip items={skills} />
         </div>
       </Container>
     </section>
