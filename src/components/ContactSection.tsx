@@ -127,7 +127,7 @@ const ContactSection = () => {
             
             {isSuccess && (
               <div className="p-4 rounded border-l-4 bg-green-900/30 border-green-500 text-green-300">
-                <p className="font-medium">Message sent successfully! I'll get back to you soon.</p>
+                <p className="font-medium">Message sent successfully! I&apos;ll get back to you soon.</p>
               </div>
             )}
           </form>
